@@ -1,2 +1,2 @@
-# warjammer
+# WarJammer
 The Unsquelchable PvPGN Spammer
