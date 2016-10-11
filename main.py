@@ -28,9 +28,9 @@ class attack(QThread):
 
         self.wait()
 
-    def pvpgn_login(self):
+    def check_login_creds(self):
 
-        print 'attack.pvpgn_login()'
+        print 'attack.check_login_creds()\n'
 
         while True:
 
@@ -38,10 +38,10 @@ class attack(QThread):
 
             try:
                 self.buffer_size = 2048
-                self.s.setblocking(0)
-                self.s.settimeout(10)
                 self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self.s.connect((self.server, 6112))
+                self.s.setblocking(0)
+                self.s.settimeout(10)
 
                 self.s.send("\r\n")
 
@@ -68,11 +68,90 @@ class attack(QThread):
                             break
                 data = ''.join(total_data)
 
+                print 'WARJAMMER DEBUG: attack.check_login_creds() Output -----'
+                print data
+                print '--------------------------------------------------'
+
+                if "failed" in data:
+                    self.connection_status = 0
+                    self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'Login failed', 'red')
+                    self.emit(SIGNAL('done(QString)'), 'no')
+                    return
+
+                elif "no bot" in data:
+                    self.connection_status = 0
+                    self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'Server not supported', 'red')
+                    self.emit(SIGNAL('done(QString)'), 'no')
+                    return
+
+                elif "Your unique name:" in data:
+                    self.connection_status = 1
+                    self.emit(SIGNAL('catch_status_msg(QString, QString)'), 'Connected', 'light gray')
+                    return
+
+                else:
+                    self.connection_status = 0
+                    self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'Received invalid response', 'red')
+                    self.s.close()
+                    continue
+
+            except Exception as e:
+                print 'WarJammer Debug: attack.check_login_creds() Socket Error -----'
+                print e
+                print '--------------------------------------------------------'
+                self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'No reply from server', 'red')
+                self.emit(SIGNAL('done(QString)'), 'no')
+                self.connection_status = 0
+                return
+
+    def pvpgn_login(self):
+
+        print 'attack.pvpgn_login()\n'
+
+        while True:
+
+            self.connection_status = 0
+
+            try:
+                self.buffer_size = 2048
+                self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                self.s.connect((self.server, 6112))
+                self.s.setblocking(0)
+                self.s.settimeout(10)
+
+                self.s.send("\r\n")
+
+                self.s.send(self.username)
+                self.s.send("\r\n")
+
+                self.s.send(self.password)
+                self.s.send("\r\n")
+
+                total_data = [];
+                data = ''
+                while True:
+                    data = self.s.recv(8192)
+                    if 'Joining channel:' in data or 'Login failed.' in data:
+                        total_data.append(data)
+                        break
+                    total_data.append(data)
+                    if len(total_data) > 1:
+                        # check if end_of_data was split
+                        last_pair = total_data[-2] + total_data[-1]
+                        if 'Joining channel:' in last_pair:
+                            total_data[-2] = last_pair[:last_pair.find('Joining channel:')]
+                            total_data.pop()
+                            break
+                data = ''.join(total_data)
+
+                print 'WARJAMMER DEBUG: attack.pvpgn_login() Output -----'
+                print data
+                print '--------------------------------------------------'
+
                 if "failed" in data:
                     self.connection_status = 0
                     self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'Login failed', 'red' )
-                    self.emit(SIGNAL('done(QString)'), 'no')
-                    return
+                    continue
 
                 elif "no bot" in data:
                     self.connection_status = 0
@@ -92,7 +171,9 @@ class attack(QThread):
                     continue
 
             except Exception as e:
+                print 'WarJammer Debug: attack.pvpgn_login() Socket Error -----'
                 print e
+                print '--------------------------------------------------------'
                 self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'No reply from server', 'red')
                 self.emit(SIGNAL('done(QString)'), 'no')
                 self.connection_status = 0
@@ -238,6 +319,7 @@ class attack(QThread):
 
 
             if "<from" in data:
+                print 'WARJAMMER DEBUG: Msg whispered to bot'
                 self.s.send("/clan disband yes")
                 self.s.send("\r\n")
 
@@ -251,6 +333,7 @@ class attack(QThread):
            # expected output of some of the /clan commands
 
             elif ">" in data and "<username>" not in data:
+                print 'WARJAMMER DEBUG: Msg in chat'
                 self.s.send("/clan disband yes")
                 self.s.send("\r\n")
                 self.s.close()
@@ -271,6 +354,7 @@ class attack(QThread):
             # try again:
 
             elif "You are already in clan" in data:
+                print 'WARJAMMER DEBUG: Already in a clan'
                 self.s.send("/clan disband yes")
                 self.s.send("\r\n")
                 self.s.close()
@@ -292,12 +376,12 @@ class attack(QThread):
             # matched an existing one (unlikely but possible). So generate new random tag and try again:
 
             elif "Please choice another one." in data:
+                print 'WARJAMMER DEBUG: Clan tag already in use'
+
                 self.clan_tag = self.random_clan_tag()
 
                 self.s.send("/clan disband yes")
                 self.s.send("\r\n")
-
-                self.s.close()
                 self.pvpgn_login()
                 if self.connection_status == 1:
                     continue
@@ -307,6 +391,7 @@ class attack(QThread):
             # Just in case the developers fix the spelling, but it is still 'choice' as of PvPGN 1.99.7-PRO
 
             elif "Please choose another one." in data:
+                print 'WARJAMMER DEBUG: Clan tag already in use'
                 self.clan_tag = self.random_clan_tag()
 
                 self.s.send("/clan disband yes")
@@ -328,6 +413,7 @@ class attack(QThread):
                 self.s.send("\r\n")
                 self.s.close()
                 self.pvpgn_login()
+                print 'WARJAMMER DEBUG: self.connection_status == ' + str(self.connection_status)
                 if self.connection_status == 1:
                     continue
                 else:
@@ -336,10 +422,12 @@ class attack(QThread):
             # elif flooding:
 
             elif "quota has been exceeded!" in data:
+                print 'WARJAMMER DEBUG: Disc for flooding'
                 self.s.send("/clan disband yes")
                 self.s.send("\r\n")
                 self.s.close()
                 self.pvpgn_login()
+                print 'WARJAMMER DEBUG: self.connection_status == ' + str(self.connection_status)
                 if self.connection_status == 1:
                     continue
                 else:
@@ -356,13 +444,16 @@ class attack(QThread):
 
     def run(self):
             print 'attack.run()'
-            # Login, then if login is successful, figure out what attack to launch, then launch attack
-            self.pvpgn_login()
+            # Check login creds, then if login is successful, start the usual login function, figure out what attack to
+            # launch, then launch attack
+            self.check_login_creds()
             if self.connection_status == 1:
-                if self.attack_mode == 0:
-                    self.fl_attack()
-                elif self.attack_mode == 1:
-                    self.ci_attack()
+                self.pvpgn_login()
+                if self.connection_status == 1:
+                    if self.attack_mode == 0:
+                        self.fl_attack()
+                    elif self.attack_mode == 1:
+                        self.ci_attack()
 
 
 class WarJammer(QtGui.QMainWindow, ui.Ui_MainWindow):
