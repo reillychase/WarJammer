@@ -380,19 +380,11 @@ class WarJammer(QtGui.QMainWindow, ui.Ui_MainWindow):
         self.input_victim.returnPressed.connect(self.start_attack)
         self.input_clan_name.returnPressed.connect(self.start_attack)
 
-        if str(self.input_server.currentText()) == 'server.war2.ru':
-            self.radio_clan_invite.setDisabled(False)
-            self.radio_friend_list.setDisabled(True)
-            self.radio_clan_invite.setChecked(1)
-            self.radio_friend_list.setChecked(0)
-            self.input_clan_name.setVisible(True)
-        else:
-            self.radio_friend_list.setChecked(1)
+        self.disable_button_check()
 
         # If new server is picked from dropdown, run function to check if one of the attacks need to be disabled:
         self.input_server.currentIndexChanged.connect(self.disable_button_check)
-        # By default, friend list attack is selected, so Clan Name input is hidden
-        self.input_clan_name.setVisible(False)
+
         # If a radio button is toggled, run a function to either hide or unhide the Clan Name input
         self.radio_friend_list.toggled.connect(self.radio_friend_list_clicked)
         self.radio_clan_invite.toggled.connect(self.radio_clan_invite_clicked)

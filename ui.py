@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'warjammer.ui'
 #
-# Created: Fri Oct  7 13:54:20 2016
+# Created: Tue Oct 11 10:45:23 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -62,7 +62,6 @@ class Ui_MainWindow(object):
         self.formLayout.setWidget(2, QtGui.QFormLayout.SpanningRole, self.input_password)
         self.input_server = QtGui.QComboBox(self.layoutWidget)
         self.input_server.setObjectName(_fromUtf8("input_server"))
-        self.input_server.addItem(_fromUtf8(""))
         self.input_server.addItem(_fromUtf8(""))
         self.input_server.addItem(_fromUtf8(""))
         self.input_server.addItem(_fromUtf8(""))
@@ -129,11 +128,10 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "WarJammer 3.0", None))
         self.input_username.setPlaceholderText(_translate("MainWindow", "Username", None))
         self.input_password.setPlaceholderText(_translate("MainWindow", "Password", None))
-        self.input_server.setItemText(0, _translate("MainWindow", "pvpgn.valpohacks.com", None))
-        self.input_server.setItemText(1, _translate("MainWindow", "server.war2.ru", None))
-        self.input_server.setItemText(2, _translate("MainWindow", "backup.war2.ru", None))
-        self.input_server.setItemText(3, _translate("MainWindow", "server.war2.me", None))
-        self.input_server.setItemText(4, _translate("MainWindow", "backup.war2.me", None))
+        self.input_server.setItemText(0, _translate("MainWindow", "server.war2.ru", None))
+        self.input_server.setItemText(1, _translate("MainWindow", "backup.war2.ru", None))
+        self.input_server.setItemText(2, _translate("MainWindow", "server.war2.me", None))
+        self.input_server.setItemText(3, _translate("MainWindow", "backup.war2.me", None))
         self.label_spambot_login.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Spambot Login</span></p></body></html>", None))
         self.label_attack_settings.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-weight:600;\">Attack Settings</span></p></body></html>", None))
         self.input_victim.setPlaceholderText(_translate("MainWindow", "Victim Username", None))
