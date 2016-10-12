@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>234</width>
+    <height>430</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>234</width>
+    <height>430</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>234</width>
+    <height>430</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>WarJammer 3.0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../warjammer-gui/warjammer-resources.qrc">
+    <normaloff>:/warjammer-images/archer.gif</normaloff>:/warjammer-images/archer.gif</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>234</width>
+     <height>430</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>234</width>
+     <height>430</height>
+    </size>
+   </property>
+   <widget class="QLabel" name="img_banner">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="../warjammer-gui/warjammer-resources.qrc">:/warjammer-images/warjammer.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>211</width>
+      <height>351</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QFormLayout" name="formLayout">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+         </property>
+         <item row="1" column="0" colspan="2">
+          <widget class="QLineEdit" name="input_username">
+           <property name="placeholderText">
+            <string>Username</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QLineEdit" name="input_password">
+           <property name="inputMethodHints">
+            <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText</set>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
+           </property>
+           <property name="placeholderText">
+            <string>Password</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0" colspan="2">
+          <widget class="QComboBox" name="input_server">
+           <item>
+            <property name="text">
+             <string>server.war2.ru</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>backup.war2.ru</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>server.war2.me</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>backup.war2.me</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_spambot_login">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Spambot Login&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>203</width>
+           <height>13</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_attack_settings">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Attack Settings&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="input_victim">
+           <property name="placeholderText">
+            <string>Victim Username</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="input_clan_name">
+           <property name="placeholderText">
+            <string>Clan Name</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radio_friend_list">
+           <property name="text">
+            <string>Friend List Attack</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="radio_clan_invite">
+           <property name="text">
+            <string>Clan Invite Attack</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>203</width>
+           <height>13</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_status_msg_2">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_status_msg">
+         <property name="text">
+          <string>Not Connected</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>203</width>
+           <height>13</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_attack">
+       <property name="text">
+        <string>Attack</string>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>input_username</tabstop>
+  <tabstop>input_password</tabstop>
+  <tabstop>input_server</tabstop>
+  <tabstop>input_victim</tabstop>
+  <tabstop>input_clan_name</tabstop>
+  <tabstop>radio_friend_list</tabstop>
+  <tabstop>radio_clan_invite</tabstop>
+  <tabstop>button_attack</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../warjammer-gui/warjammer-resources.qrc"/>
+  <include location="../../.designer/backup/warjammer-resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
