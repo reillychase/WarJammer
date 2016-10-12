@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="warjammer-images">
+    <file>warjammer.ico</file>
+    <file>warjammer.png</file>
+  </qresource>
+</RCC>

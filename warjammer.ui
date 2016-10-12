@@ -257,7 +257,6 @@
  </tabstops>
  <resources>
   <include location="../warjammer-gui/warjammer-resources.qrc"/>
-  <include location="../../.designer/backup/warjammer-resources.qrc"/>
  </resources>
  <connections/>
 </ui>

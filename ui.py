@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'warjammer.ui'
 #
-# Created: Wed Oct 12 15:36:23 2016
+# Created: Wed Oct 12 15:40:40 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
