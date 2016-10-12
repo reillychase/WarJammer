@@ -248,8 +248,15 @@ class attack(QThread):
 
             elif "offline" in data:
                 self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'User is offline', 'red' )
-                self.emit(SIGNAL('done(QString)'), 'no')
-                break
+                self.emit(SIGNAL('catch_status_msg(QString, QString)'), 'Message send failed',
+                          'light gray')
+                self.s.close()
+                self.pvpgn_login()
+                if self.connection_status == 1:
+                    continue
+                else:
+                    self.s.close()
+                    break
 
             elif "Unknown" in data:
                 self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'User does not exist', 'red' )
@@ -368,8 +375,15 @@ class attack(QThread):
 
             elif " is not online or is already member of clan!" in data:
                 self.emit(SIGNAL('catch_status_msg_2(QString, QString)'), 'User is already in a clan or offline','red')
-                self.emit(SIGNAL('done(QString)'), 'no')
-                break
+                self.emit(SIGNAL('catch_status_msg(QString, QString)'), 'Invite send failed',
+                          'light gray')
+                self.s.close()
+                self.pvpgn_login()
+                if self.connection_status == 1:
+                    continue
+                else:
+                    self.s.close()
+                    break
 
             # 'Please choice another one.' Lol yes this is not a mistake, typo is still in latest version of PvPGN. This
             # means that the clan already exists, so this would only trigger if somehow the randomly generated clan tag
