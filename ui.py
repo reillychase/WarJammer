@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'warjammer.ui'
 #
-# Created: Tue Oct 11 10:45:23 2016
+# Created: Wed Oct 12 15:36:23 2016
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,7 +30,7 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(234, 430))
         MainWindow.setMaximumSize(QtCore.QSize(234, 430))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/warjammer-images/archer.gif")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/warjammer-images/warjammer.ico")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setMinimumSize(QtCore.QSize(234, 430))

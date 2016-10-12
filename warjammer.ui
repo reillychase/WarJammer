@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../warjammer-gui/warjammer-resources.qrc">
-    <normaloff>:/warjammer-images/archer.gif</normaloff>:/warjammer-images/archer.gif</iconset>
+    <normaloff>:/warjammer-images/warjammer.ico</normaloff>:/warjammer-images/warjammer.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="minimumSize">
